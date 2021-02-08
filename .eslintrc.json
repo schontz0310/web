@@ -38,10 +38,11 @@
         }
       ],
       "react-hooks/rules-of-hooks": "error",
-      "prettier/prettier": "error",
+      "prettier/prettier": "off",
       "react-hooks/exhaustive-deps": "warn",
       "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
       "import/prefer-default-export": "off",
+      "react/prop-types": "off",
       "no-use-before-define":"off"
 
 

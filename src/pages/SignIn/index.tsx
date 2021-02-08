@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable no-unused-expressions */
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
 import { Form } from '@unform/web';
@@ -13,7 +13,9 @@ import getValidationErrors from '../../utils/getvalidationErros';
 import Button from '../../components/Button/index';
 import Input from '../../components/Input/index';
 
-import { Container, Content, Background, Animationcontainer } from './styles';
+import ModalAdmin from '../../components/Modal/ModalAdmin'
+
+import { Container, Content, Background, Animationcontainer, LeftSide } from './styles';
 import logo from '../../assets/LogoAS.svg';
 import { useToast } from '../../hook/toast';
 
@@ -23,6 +25,8 @@ interface SignInFormdata {
 }
 
 const Signin: React.FC = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+
   const formRef = useRef<FormHandles>(null);
 
   const { signIn } = useAuth();
@@ -62,35 +66,54 @@ const Signin: React.FC = () => {
     [signIn, addToast],
   );
 
+  function toggleModal(): void {
+    setModalOpen(!modalOpen);
+  }
+
+
+
   return (
     <>
       <Container>
-        <Content>
-          <Animationcontainer>
-            <img src={logo} alt="logomarca" />
-            <Form ref={formRef} onSubmit={handleSubmit}>
-              <h1>Faça seu Logon</h1>
-              <Input
-                name="email"
-                icon={FiMail}
-                autoComplete="off"
-                placeholder="E-mail"
-              />
-              <Input
-                name="password"
-                icon={FiLock}
-                type="password"
-                placeholder="Senha"
-              />
-              <Button type="submit">Entrar</Button>
-              <Link to="/forgot-password">Esqueci minha senha</Link>
-            </Form>
-            <Link to="/signup">
-              <FiLogIn />
-              Criar conta
-            </Link>
-          </Animationcontainer>
-        </Content>
+        <LeftSide>
+          <Content>
+            <Animationcontainer>
+              <img src={logo} alt="logomarca" />
+              <Form ref={formRef} onSubmit={handleSubmit}>
+                <h1>Faça seu Logon</h1>
+                <Input
+                  name="email"
+                  icon={FiMail}
+                  autoComplete="off"
+                  placeholder="E-mail"
+                />
+                <Input
+                  name="password"
+                  icon={FiLock}
+                  type="password"
+                  placeholder="Senha"
+                />
+                <Button type="submit">Entrar</Button>
+              </Form>
+              <Link to="/signup">
+                <FiLogIn />
+                Criar conta
+              </Link>
+            </Animationcontainer>
+
+          </Content>
+          <footer>
+            <button type="button" onClick={toggleModal}>
+              <p>Powered by Agility in Solutions</p>
+            </button>
+            <ModalAdmin
+              isOpen={modalOpen}
+              setIsOpen={toggleModal}
+            />
+          </footer>
+        </LeftSide>
+
+
         <Background />
       </Container>
     </>
