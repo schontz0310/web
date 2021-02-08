@@ -13,6 +13,12 @@ export const Form = styled(Unform)`
     margin-bottom: 40px;
   }
 
+  input:required{
+    background: transparent;
+    padding: 0;
+
+  }
+
   button {
     margin-top: 48px;
     align-self: flex-end;
@@ -22,7 +28,7 @@ export const Form = styled(Unform)`
     font-weight: 600;
     border-radius: 8px;
     border: 0;
-    background: #39b100;
+    background: #C28F0B;
     color: #fff;
 
     display: flex;
@@ -36,7 +42,7 @@ export const Form = styled(Unform)`
     .icon {
       display: flex;
       padding: 16px 16px;
-      background: #41c900;
+      background: #e8b022;
       border-radius: 0 8px 8px 0;
       margin: 0 auto;
     }
