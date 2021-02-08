@@ -30,7 +30,7 @@ const Modal: React.FC<IModalProps> = ({ children, isOpen, setIsOpen }) => {
           right: 'auto',
           bottom: 'auto',
           transform: 'translate(-50%, -50%)',
-          background: '#F0F0F5',
+          background: '#182630',
           color: '#000000',
           borderRadius: '8px',
           width: '90vw',

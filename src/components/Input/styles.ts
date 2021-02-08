@@ -50,18 +50,27 @@ export const Container = styled.div<ContainerProps>`
     background: transparent;
     border: 0;
     color: #f4ede8;
+    outline: 0;
 
     &::placeholder {
       color: #666360;
     }
   }
 
-  input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0px 1000px #232129 inset !important;
-    -webkit-text-fill-color: #f4ede8 !important;
-    border-radius: 0;
+  input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #fff;
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+  transition: background-color 5000s ease-in-out 0s;
     marker: none;
   }
+
+  input:focus {
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline: 0;
+}
   svg {
     margin-right: 16px;
   }
