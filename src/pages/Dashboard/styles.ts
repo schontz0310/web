@@ -6,13 +6,7 @@ export const Container = styled.div`
   align-items: stretch;
   background: #f2f2f2;
 `;
-export const Header = styled.header`
-  position: absolute;
-  width: 100%;
-  top: 0px;
-  height: 5rem;
-  background: #2d3748;
-`;
+
 
 export const SideBar = styled.nav`
   position: absolute;

@@ -1,5 +1,8 @@
 import React from 'react';
-import { Container, Header, SideBar } from './styles';
+import Header from '../../components/Header/Header';
+import { Container, SideBar } from './styles';
+
+
 
 const Dashboard: React.FC = () => {
   return (

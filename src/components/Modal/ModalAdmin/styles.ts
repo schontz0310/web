@@ -13,7 +13,7 @@ export const Form = styled(Unform)`
     margin-bottom: 40px;
   }
 
-  input:required{
+  input{
     background: transparent;
     padding: 0;
 

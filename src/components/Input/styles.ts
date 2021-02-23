@@ -9,14 +9,14 @@ interface ContainerProps {
 }
 
 export const Container = styled.div<ContainerProps>`
-  background: #232129;
+  background: #f2f2f2;
   border-radius: 10px;
   padding: 16px;
   width: 100%;
   font-size: 150%;
 
-  color: #666360;
-  border: 2px solid #232129;
+  color: #232129;
+  border: 2px solid #f2f2f2;
 
   & + div {
     margin-top: 8px;
@@ -49,18 +49,17 @@ export const Container = styled.div<ContainerProps>`
     flex: 1;
     background: transparent;
     border: 0;
-    color: #f4ede8;
+    color: #232129;
     outline: 0;
 
     &::placeholder {
-      color: #666360;
+      color: #b1b1b1;
     }
   }
 
-  input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus {
-  -webkit-text-fill-color: #fff;
+input:-webkit-autofill,
+input:-webkit-autofill:hover{
+  -webkit-text-fill-color: #000;
   -webkit-box-shadow: 0 0 0px 1000px transparent inset;
   transition: background-color 5000s ease-in-out 0s;
     marker: none;
