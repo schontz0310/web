@@ -1,12 +1,15 @@
+import { shade } from 'polished'
 import styled from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
   position: absolute;
+  background: #2d3748;
   width: 100%;
   top: 0px;
   height: 4.5rem;
   padding-right: 5rem;
+
 
   button {
     margin-left: auto;
@@ -16,8 +19,14 @@ export const Container = styled.div`
 
   svg {
     color: #999591;
-    width: 20px;
-    height: 20px;
+    width: 1.2rem;
+    height: 1.2rem;
+    transition: background-color 0.3s, transform 0.3s;
+
+    &:hover{
+      color: ${shade(0.3, '#fff')};
+      transform: scale(1.2, 1.2);
+    }
   }
 
   `
@@ -32,7 +41,7 @@ export const LeftSide = styled.div`
 
   img{
     margin-left: 1rem;
-    width: 40%
+    width: 5rem;
   }
 
   p{

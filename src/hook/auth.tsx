@@ -12,6 +12,12 @@ interface User {
   avatar_url: string;
 }
 
+interface Master {
+  admin_users_id: string;
+  admin_users_email: string;
+  admin_users_name: string;
+}
+
 interface SigInCredentials {
   email: string;
   password: string;
@@ -22,10 +28,18 @@ interface AuthState {
   user: User;
 }
 
+interface MasterAuthState {
+  token: string;
+  master: Master;
+}
+
 interface AuthContextData {
   user: User;
+  master: Master;
   signIn(credentials: SigInCredentials): Promise<void>;
+  masterSignIn(credentials: SigInCredentials): Promise<void>;
   signOut(): void;
+  masterSignOut(): void;
   updateUser(user: User): void;
 }
 
@@ -34,9 +48,10 @@ export const AuthContext = createContext<AuthContextData>(
 );
 
 export const AuthProvider: React.FC = ({ children }) => {
+
   const [data, setData] = useState<AuthState>(() => {
-    const token = localStorage.getItem('@GoBarber:token');
-    const user = localStorage.getItem('@GoBarber:user');
+    const token = localStorage.getItem('@AGS:token');
+    const user = localStorage.getItem('@AGS:user');
 
     if (token && user) {
       api.defaults.headers.authorization = `Bearer ${token}`;
@@ -46,6 +61,18 @@ export const AuthProvider: React.FC = ({ children }) => {
     return {} as AuthState;
   });
 
+  const [masterData, setMasterData] = useState<MasterAuthState>(() => {
+    const token = localStorage.getItem('@AGS:mtoken');
+    const master = localStorage.getItem('@AGS:muser');
+
+    if (token && master) {
+      api.defaults.headers.authorization = `Bearer ${token}`;
+      return { token, master: JSON.parse(master) };
+    }
+
+    return {} as MasterAuthState;
+  });
+
   const signIn = useCallback(async ({ email, password }: SigInCredentials) => {
     const response = await api.post('/sessions', {
       email,
@@ -53,24 +80,46 @@ export const AuthProvider: React.FC = ({ children }) => {
     });
     const { token, user } = response.data;
 
-    localStorage.setItem('@GoBarber:token', token);
-    localStorage.setItem('@GoBarber:user', JSON.stringify(user));
+    localStorage.setItem('@AGS:token', token);
+    localStorage.setItem('@AGS:user', JSON.stringify(user));
 
     api.defaults.headers.authorization = `Bearer ${token}`;
 
     setData({ token, user });
   }, []);
 
+  const masterSignIn = useCallback(async ({ email, password }: SigInCredentials) => {
+    const response = await api.post('/sessions/master', {
+      email,
+      password,
+    });
+    const { token, user } = response.data;
+
+    localStorage.setItem('@AGS:mtoken', token);
+    localStorage.setItem('@AGS:muser', JSON.stringify(user));
+
+    api.defaults.headers.authorization = `Bearer ${token}`;
+
+    setMasterData({ token, master: user});
+  }, []);
+
   const signOut = useCallback(() => {
-    localStorage.removeItem('@GoBarber:token');
-    localStorage.removeItem('@GoBarber:user');
+    localStorage.removeItem('@AGS:token');
+    localStorage.removeItem('@AGS:user');
 
     setData({} as AuthState);
   }, []);
 
+  const masterSignOut = useCallback(() => {
+    localStorage.removeItem('@AGS:mtoken');
+    localStorage.removeItem('@AGS:muser');
+
+    setMasterData({} as MasterAuthState);
+  }, []);
+
   const updateUser = useCallback(
     (user: User) => {
-      localStorage.setItem('@GoBarber:user', JSON.stringify(user));
+      localStorage.setItem('@AGS:user', JSON.stringify(user));
       setData({
         token: data.token,
         user,
@@ -81,7 +130,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user: data.user, signIn, signOut, updateUser }}
+      value={{ user: data.user, master: masterData.master, signIn, signOut, updateUser, masterSignIn, masterSignOut }}
     >
       {children}
     </AuthContext.Provider>
