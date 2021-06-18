@@ -1,6 +1,16 @@
 import { shade } from 'polished';
 import styled, { keyframes } from 'styled-components';
 
+export const MenuArea = styled.aside`
+`;
+
+export const Menu = styled.nav`
+  position: fixed;
+  background-color: #444;
+  transition: width 600ms ease;
+  z-index: 1;
+`;
+
 export const Container = styled.div`
   height: 100vh;
   display: flex;
@@ -49,8 +59,6 @@ export const SideBarItem = styled.div`
   flex-direction: column;
   background: transparent;
   height: 3rem;
-
-
   div{
     padding: 0.5rem 0.5rem;
     display: flex;

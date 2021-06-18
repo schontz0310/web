@@ -7,6 +7,9 @@ import {
   RouteProps as ReactRouterProps,
   Redirect,
 } from 'react-router-dom';
+import Header from '../components/Header/Header';
+import SideBarAdmin from '../components/SideBarAdmin';
+import SideBarApp from '../components/SideBarNew';
 
 import { useAuth } from '../hook/auth';
 
@@ -22,20 +25,20 @@ const Route: React.FC<RouteProps> = ({
 }) => {
   const { user, master } = useAuth();
 
-  console.log(!!user, '---', !!master, '---', isPrivate )
-
-
-
-  const resultado = (!!user === !!master && isPrivate)
-  console.log(resultado)
   return (
     <ReactRoute
       {...rest}
       render={({location}) => {
         if (master){
-          console.log('--masetr')
           if(isPrivate === !!master){
-            return <Component />
+            console.log("Master")
+            return (
+              <>
+                <Component />
+                <SideBarAdmin />
+                <Header />
+              </>
+            )
           }
             return(
               <Redirect
@@ -47,13 +50,28 @@ const Route: React.FC<RouteProps> = ({
             )
         }
         if (user){
-          console.log('user exist')
-          return <Component />
+          if(isPrivate === !!user){
+            console.log("User")
+            return (
+              <>
+                <Component />
+                <SideBarApp />
+                <Header />
+              </>
+            )
+          }
+            return(
+              <Redirect
+                to={{
+                pathname: isPrivate ? '/' : '/dashboard',
+                state: { from: location },
+              }}
+              />
+            )
         }
 
         /// case isPrivate
         if (isPrivate){
-          console.log('private exist')
           if(isPrivate === !!master || isPrivate === !!user){
             return <Component />
           }
@@ -66,7 +84,6 @@ const Route: React.FC<RouteProps> = ({
             />
           )
         }
-        console.log('last')
         return <Component />
         }}
     />
@@ -74,18 +91,3 @@ const Route: React.FC<RouteProps> = ({
 };
 
 export default Route;
-
-/*
-render={({ location }) => {
-        return isPrivate === !!master ? (
-          <Component />
-        ) : (
-          <Redirect
-            to={{
-              pathname: isPrivate ? '/' : '/admin',
-              state: { from: location },
-            }}
-          />
-        );
-      }}
-*/

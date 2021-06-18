@@ -2,6 +2,8 @@
 import styled, { css } from 'styled-components';
 import Tooltip from '../Tooltip';
 
+
+
 interface ContainerProps {
   isFocused: boolean;
   isFilled: boolean;
@@ -10,10 +12,10 @@ interface ContainerProps {
 
 export const Container = styled.div<ContainerProps>`
   background: #f2f2f2;
-  border-radius: 0.5rem;
   padding: 16px;
   width: 100%;
   font-size: 150%;
+  border-radius: 0.5rem;
 
   color: #232129;
   border: 2px solid #f2f2f2;
@@ -42,27 +44,31 @@ export const Container = styled.div<ContainerProps>`
       color: #ff9000;
     `}
 
-  input {
+  select {
     flex: 1;
     background: transparent;
     border: 0;
-    color: #232129;
     outline: 0;
+    height: 21px;
+    color: #b1b1b1;
+    option{
+    color: #b1b1b1;
+    }
 
     &::placeholder {
       color: #b1b1b1;
     }
   }
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover{
+select:-webkit-autofill,
+select:-webkit-autofill:hover{
   -webkit-text-fill-color: #000;
-  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+  box-shadow: 0 0 0px 1000px transparent inset;
   transition: background-color 5000s ease-in-out 0s;
     marker: none;
   }
 
-  input:focus {
+  select:focus {
     box-shadow: 0 0 0 0;
     border: 0 none;
     outline: 0;
@@ -88,3 +94,4 @@ export const Error = styled(Tooltip)`
     }
   }
 `;
+

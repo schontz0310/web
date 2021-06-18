@@ -6,7 +6,6 @@ import BackgroundImage from '../../assets/background.png';
 export const Container = styled.div`
   height: 100vh;
   min-height: 600px;
-
   display: flex;
   align-items: stretch;
 `;
@@ -30,10 +29,12 @@ export const Animationcontainer = styled.div`
   transition: animation 0.2s;
   animation: ${apperFromLeft} 1s;
   form {
-    margin: 80px 0;
+    margin: 40px 0;
     width: 340px;
     text-align: center;
-
+    div + div{
+      margin-top: 0.75rem;
+    }
     h1 {
       margin-bottom: 24px;
     }
@@ -74,6 +75,7 @@ export const Animationcontainer = styled.div`
 export const LeftSide = styled.div`
   height: 100vh;
   min-height: 600px;
+  background-color: #2d3748;
   display: flex;
   flex-direction: column;
   //place-content: center;
@@ -108,8 +110,9 @@ export const Content = styled.div`
   place-content: center;
   align-items: center;
 
+
   width: 100%;
-  height: 80vh;
+  height: 100vh;
   min-height: 600px;
   max-width: 40rem;
 
@@ -121,7 +124,7 @@ export const Content = styled.div`
   }
 
   form {
-    margin-top: 60px;
+    margin-top: 30px;
     width: 340px;
     text-align: center;
 

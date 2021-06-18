@@ -55,7 +55,6 @@ const ModalAdmin: React.FC<IModalProps> = ({
           password: data.password,
         });
       } catch (err) {
-        console.log(err);
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
           formRef.current?.setErrors(errors);
@@ -68,7 +67,7 @@ const ModalAdmin: React.FC<IModalProps> = ({
         });
       }
     },
-    [addToast, masterSignIn, setIsOpen],
+    [addToast, masterSignIn],
   );
 
   return (

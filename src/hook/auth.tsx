@@ -5,7 +5,7 @@
 import React, { createContext, useCallback, useState, useContext } from 'react';
 import api from '../services/api';
 
-interface User {
+export interface User {
   id: string;
   name: string;
   email: string;
@@ -19,6 +19,12 @@ interface Master {
 }
 
 interface SigInCredentials {
+  company_type: string;
+  company_type_value: string;
+  email: string;
+  password: string;
+}
+interface SigInMasterCredentials {
   email: string;
   password: string;
 }
@@ -37,7 +43,7 @@ interface AuthContextData {
   user: User;
   master: Master;
   signIn(credentials: SigInCredentials): Promise<void>;
-  masterSignIn(credentials: SigInCredentials): Promise<void>;
+  masterSignIn(credentials: SigInMasterCredentials): Promise<void>;
   signOut(): void;
   masterSignOut(): void;
   updateUser(user: User): void;
@@ -73,10 +79,17 @@ export const AuthProvider: React.FC = ({ children }) => {
     return {} as MasterAuthState;
   });
 
-  const signIn = useCallback(async ({ email, password }: SigInCredentials) => {
+  const signIn = useCallback(async ({
+    email,
+    password,
+    company_type,
+    company_type_value }: SigInCredentials) => {
+
     const response = await api.post('/sessions', {
       email,
       password,
+      company_type,
+      company_type_value
     });
     const { token, user } = response.data;
 
@@ -84,11 +97,10 @@ export const AuthProvider: React.FC = ({ children }) => {
     localStorage.setItem('@AGS:user', JSON.stringify(user));
 
     api.defaults.headers.authorization = `Bearer ${token}`;
-
     setData({ token, user });
   }, []);
 
-  const masterSignIn = useCallback(async ({ email, password }: SigInCredentials) => {
+  const masterSignIn = useCallback(async ({ email, password }: SigInMasterCredentials) => {
     const response = await api.post('/sessions/master', {
       email,
       password,

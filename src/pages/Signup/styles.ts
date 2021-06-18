@@ -10,6 +10,7 @@ export const Container = styled.div`
 `;
 export const Content = styled.div`
   display: flex;
+  background-color: #2d3748;
   flex-direction: column;
   place-content: center;
   align-items: center;
@@ -39,6 +40,9 @@ export const Animationcontainer = styled.div`
     margin: 80px 0;
     width: 340px;
     text-align: center;
+    div + div{
+      margin-top: 0.75rem;
+    }
 
     h1 {
       margin-bottom: 24px;

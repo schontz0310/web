@@ -49,8 +49,6 @@ export const SideBarItem = styled.div`
   flex-direction: column;
   background: transparent;
   height: 3rem;
-
-
   div{
     padding: 0.5rem 0.5rem;
     display: flex;

@@ -1,5 +1,8 @@
 import { shade } from 'polished'
 import styled from 'styled-components'
+import {HeaderStyle} from '../../styles/parameters'
+
+const headerHeight = HeaderStyle.Header.height
 
 export const Container = styled.div`
   display: flex;
@@ -7,7 +10,7 @@ export const Container = styled.div`
   background: #2d3748;
   width: 100%;
   top: 0px;
-  height: 4.5rem;
+  height: ${headerHeight}rem;
   padding-right: 5rem;
 
 

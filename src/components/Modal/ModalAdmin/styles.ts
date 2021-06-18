@@ -6,6 +6,11 @@ export const Form = styled(Unform)`
   display: flex;
   flex-direction: column;
 
+  div+div{
+    margin-top: 0.75rem;
+  }
+
+
   h1 {
     font-weight: 600;
     font-size: 36px;

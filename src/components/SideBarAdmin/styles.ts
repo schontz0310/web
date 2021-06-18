@@ -1,5 +1,8 @@
 import { shade } from 'polished';
 import styled, { keyframes } from 'styled-components';
+import {HeaderStyle} from '../../styles/parameters'
+
+const headerHeight = HeaderStyle.Header.height
 
 export const Container = styled.div`
   height: 100vh;
