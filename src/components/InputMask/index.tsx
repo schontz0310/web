@@ -94,7 +94,7 @@ export default function InputMask ({
         mask={mask}
         {...rest}
       />
-      {error && (
+      {error && !isFocused && (
         <Error title={error}>
           <FiAlertCircle color="#c53030" size={20} />
         </Error>

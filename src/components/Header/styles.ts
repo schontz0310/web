@@ -8,16 +8,29 @@ export const Container = styled.div`
   display: flex;
   position: absolute;
   background: #2d3748;
-  width: 100%;
+  width: 100vw;
   top: 0px;
   height: ${headerHeight}rem;
-  padding-right: 5rem;
-
+  justify-content: space-between;
+`
+export const RightSide = styled.div`
+  display: flex;
+  flex-direction: row;
+  background: transparent;
+  width: 13rem;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5rem;
 
   button {
+    display:flex;
+    align-self:center;
     margin-left: auto;
     background: transparent;
+    width:1.2rem;
+    height:1.2rem;
     border: 0;
+    margin-right: 2rem;
   }
 
   svg {
@@ -31,8 +44,8 @@ export const Container = styled.div`
       transform: scale(1.2, 1.2);
     }
   }
+`
 
-  `
 
 export const LeftSide = styled.div`
   display: flex;

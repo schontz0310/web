@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Container = styled.aside`
   position: relative;
+  width: 20px;
+  overflow:visible;
 
   span {
     width: 160px;
@@ -11,6 +13,8 @@ export const Container = styled.div`
     font-size: 14px;
     font-weight: 500;
     visibility: hidden;
+    overflow:visible;
+    z-index: 9999;
 
     opacity: 0;
     transition: opacity 0.4s;
@@ -37,5 +41,7 @@ export const Container = styled.div`
   &:hover span {
     visibility: visible;
     opacity: 1;
+    z-index:990;
+    overflow: visible;
   }
 `;

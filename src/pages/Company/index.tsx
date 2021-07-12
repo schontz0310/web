@@ -3,7 +3,7 @@
 /* eslint-disable no-nested-ternary */
 import { FormHandles } from '@unform/core';
 import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as Yup from 'yup'
 
 import { useHistory } from 'react-router-dom';
@@ -29,7 +29,6 @@ import Button from '../../components/Button';
 import { useToast } from '../../hook/toast';
 import { useApi } from '../../services/hooks/useApi';
 import { HTTPMethod, Recurse } from '../../services/api';
-import Header from '../../components/Header/Header';
 
 interface IIBGEUFResponse {
   sigla: string;

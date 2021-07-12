@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react'
 
 import { FiPower } from 'react-icons/fi'
-import {Container, LeftSide} from './styles'
+import {Container, LeftSide, RightSide} from './styles'
 
 import LogoAS from '../../assets/LogoAS.svg'
 import { useAuth } from '../../hook/auth'
@@ -25,9 +25,11 @@ const Header: React.FC = () => {
         <img src={LogoAS} alt="logo" />
         <p>Agility in Solutions</p>
       </LeftSide>
-      <button type="button" onClick={exit}>
-        <FiPower />
-      </button>
+      <RightSide>
+        <button type="button" onClick={exit}>
+          <FiPower />
+        </button>
+      </RightSide>
     </Container>
   )
 }

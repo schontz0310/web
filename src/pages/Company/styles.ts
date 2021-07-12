@@ -1,15 +1,19 @@
 import styled from 'styled-components';
 import { Form as Unform } from '@unform/web';
+import {HeaderStyle, SideBarStyles} from '../../styles/parameters'
 
+const headerHeight = HeaderStyle.Header.height;
+const sideBarSize = SideBarStyles.width;
 
 export const Container = styled.div`
-  height: 100vh;
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background: #f2f3f5;
+  margin-top: ${headerHeight}rem;
+  margin-left: ${sideBarSize}rem;
+  height: calc(100vh - ${headerHeight}rem);
 `;
 
 export const Title = styled.h1`
@@ -26,13 +30,12 @@ export const SectionTitle = styled.h3`
 `
 
 export const FormContainer = styled.div`
-  margin-left:13rem;
+  display: flex;
   background: #fff;
   border-radius: 0.5rem;
   padding: 2%;
-  margin-top: 10rem;
-  height: 100vh;
-  width: 85%;
+  height: 98%;
+  width: 90%;
   border: none;
   box-shadow: 0px 0px 3.5rem rgba(0, 0, 0, 0.05);
   -webkit-box-shadow: 0px 0px 3.5rem rgba(0, 0, 0, 0.05);
@@ -45,11 +48,17 @@ export const FormContainer = styled.div`
 export const Form = styled(Unform)`
   display: flex;
   flex:1;
+  width: 100%;
+  height: 100%;
   flex-direction: column;
+  overflow-x: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
 `
 export const Line = styled.div`
   display: flex;
   flex: 1;
+  width: 100%;
   flex-direction: row;
   margin-bottom: 1rem;
   max-height: 3rem;

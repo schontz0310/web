@@ -5,7 +5,7 @@ const HeaderStyle = {
 }
 
 const SideBarStyles = {
-  width: 5,
+  width: 13,
 }
 
 export {HeaderStyle, SideBarStyles }

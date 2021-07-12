@@ -51,6 +51,7 @@ export const Container = styled.div<ContainerProps>`
     border: 0;
     color: #232129;
     outline: 0;
+    width: 85%;
 
     &::placeholder {
       color: #b1b1b1;
@@ -71,20 +72,19 @@ input:-webkit-autofill:hover{
     outline: 0;
 }
   svg {
-    margin-right: 16px;
   }
 `;
 
 export const Error = styled(Tooltip)`
   height: 20px;
-  margin-left: 16px;
   svg {
-    margin: 0;
   }
 
   span {
     background: #c53030;
     color: #fff;
+    overflow:visible;
+    z-index:999;
 
     &::before {
       border-color: #c53030 transparent;

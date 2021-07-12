@@ -1,8 +1,9 @@
 import { shade } from 'polished';
 import styled, { keyframes } from 'styled-components';
-import {HeaderStyle} from '../../styles/parameters'
+import {HeaderStyle, SideBarStyles} from '../../styles/parameters'
 
 const headerHeight = HeaderStyle.Header.height
+const sidebarWidht = SideBarStyles.width
 
 export const Container = styled.div`
   height: 100vh;
@@ -15,7 +16,7 @@ export const Container = styled.div`
 export const SideBar = styled.nav`
   display: flex;
   position: absolute;
-  width: 13rem;
+  width: ${sidebarWidht}rem;
   top: 0px;
   left: 0px;
   height: 100vh;
