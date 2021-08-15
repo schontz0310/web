@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaRegBuilding } from 'react-icons/fa'
+import { FaMicrochip, FaRegBuilding } from 'react-icons/fa'
 
-import { Container, SideBar, SideBarContent, SideBarItem } from './styles';
+import { SideBar, SideBarContent, SideBarItem } from './styles';
 
 
 
@@ -10,11 +10,23 @@ const SideBarAdmin: React.FC = () => {
   return (
     <SideBar>
       <SideBarContent>
-        <SideBarItem>
+        <SideBarItem> 
           <Link to="/admin/companies">
             <div>
               <FaRegBuilding />
-              Empresas
+              <p>
+                Empresas
+              </p>
+            </div>
+          </Link>
+        </SideBarItem>
+        <SideBarItem>  
+          <Link to="/admin/devices">
+            <div>
+              <FaMicrochip />
+              <p>
+                Devices
+              </p>
             </div>
           </Link>
         </SideBarItem>

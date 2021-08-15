@@ -10,6 +10,10 @@ export enum HTTPMethod{
 
 export enum Recurse{
   createCompany = 'companies',
+  createDevice = 'devices',
+  findAllDevices = 'devices/find-all',
+  removeDevice = 'devices',
+  updateDevice = 'devices',
   getMenusFromUser = 'menus'
 }
 

@@ -81,7 +81,6 @@ div:first-child{
       width: 15%;
     }
   }
-
 `
 export const CompanyAddress = styled.section`
   display: flex;

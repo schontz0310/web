@@ -15,7 +15,6 @@ import getValidationErrors from '../../utils/getvalidationErros';
 import {
   Container,
   FormContainer,
-  Title,
   Form,
   CompanyData,
   CompanyAddress,
@@ -271,7 +270,10 @@ export default function Company ():JSX.Element {
           </CompanyUser>
           <Line>
             <ActionLine>
-              <Button type="submit">Cadastrar</Button>
+              <Button 
+                type="submit"
+                model='register'
+              />
             </ActionLine>
           </Line>
         </Form>

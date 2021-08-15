@@ -125,7 +125,7 @@ const SignIn: React.FC = () => {
                   type="password"
                   placeholder="Senha"
                 />
-                <Button type="submit">Entrar</Button>
+                <Button model="register" type="submit" />
               </Form>
               <Link to="/signup">
                 <FiLogIn />

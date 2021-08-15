@@ -1,29 +1,31 @@
+/* eslint-disable camelcase */
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useQuery, UseQueryResult } from "react-query"
-import api, { HTTPMethod, Recurse } from "../api"
+import api, { Recurse } from "../api";
 
+interface ResponseResult<T> {
+  totalRegisters: number | undefined,
+  fullData: T[],
+}
 
+async function getAllDevices<T>(): Promise<T[]> { 
+  const response = await api.get(Recurse.findAllDevices)
+  return response.data
+  
+}
 
-async function get(data: unknown, recurse: Recurse): Promise<unknown> {
-  try{
-    const response = await api.get(`/${recurse}`)
-    console.log(response)
-    return response
-  }catch(error){
-    throw new Error(error);
+export function findAllDevices<T>(): ResponseResult<T> {
+  const {data}  = useQuery(
+    ['deviceslist'], 
+    () => getAllDevices<T>(),
+    {
+      staleTime: 1000 * 5
+    }  
+  ) as UseQueryResult<T[]>
+  
+  const totalRegisters = data?.length
+  return {
+    totalRegisters,
+    fullData: data || []
   }
 }
-
-export function useFetch( data: unknown, method: HTTPMethod, recurse: Recurse): UseQueryResult<void>{
-  const response  = useQuery(`${recurse}`, () => {
-    switch (method) {
-      case HTTPMethod.get :
-        get(data, recurse)
-        break;
-      default:
-        break;
-    }
-  })
-  return response
-}
-
-

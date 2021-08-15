@@ -86,7 +86,7 @@ const Signup: React.FC = () => {
                 type="password"
                 placeholder="Senha"
               />
-              <Button type="submit">Cadastrar</Button>
+              <Button model='register' type="submit">Cadastrar</Button>
             </Form>
             <Link to="/">
               <FiArrowLeft />

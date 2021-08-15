@@ -1,7 +1,8 @@
 import { shade } from 'polished';
 import styled, { keyframes } from 'styled-components';
+import { SideBarStyles} from '../../styles/parameters'
 
-
+const sidebarWidht = SideBarStyles.width
 
 export const Container = styled.div`
   height: 100vh;
@@ -14,7 +15,7 @@ export const Container = styled.div`
 export const SideBar = styled.nav`
   display: flex;
   position: absolute;
-  width: 13rem;
+  width: ${sidebarWidht}rem;
   top: 0px;
   left: 0px;
   height: 100vh;
@@ -51,6 +52,8 @@ export const SideBarItem = styled.div`
   flex-direction: column;
   background: transparent;
   height: 3rem;
+
+
   div{
     padding: 0.5rem 0.5rem;
     display: flex;
@@ -96,5 +99,3 @@ export const SideBarItem = styled.div`
       height: 2.5rem;
     }
 `;
-
-

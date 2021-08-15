@@ -9,7 +9,7 @@ import {
 } from 'react-router-dom';
 import Header from '../components/Header/Header';
 import SideBarAdmin from '../components/SideBarAdmin';
-import SideBarApp from '../components/SideBarNew';
+import SideBarApp from '../components/SideBarApp';
 
 import { useAuth } from '../hook/auth';
 

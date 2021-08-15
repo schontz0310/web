@@ -9,7 +9,7 @@ export const Container = styled.div`
   height: 100vh;
   display: flex;
   align-items: stretch;
-  background: #f2f2f2;
+  background: #f90;
 `;
 
 
@@ -29,11 +29,11 @@ export const SideBar = styled.nav`
 export const SideBarContent = styled.div`
   display: flex;
   flex: 1;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   flex-direction: column;
   background: transparent;
-  margin: 0.5rem;
+  margin: 7rem 0.5rem;
 
 `;
 
@@ -53,6 +53,8 @@ export const SideBarItem = styled.div`
   flex-direction: column;
   background: transparent;
   height: 3rem;
+  width: 95%;
+  margin-top: 1rem;
 
 
   div{
@@ -87,14 +89,24 @@ export const SideBarItem = styled.div`
   a {
       color: #f4ede8;
       align-items: initial;
-      font-size: 1.0rem;
+      font-size: 1.5rem;
       width: 100%;
       font-family: 'Roboto';
       text-decoration: none;
       transition: color 0.2s;
     }
 
+    P{
+      margin-left: 8px;
+      color: #f90;
+      font-size: 1.3rem;
+      font-weight: 400;
+      letter-spacing:1px;
+      font-family: 'Roboto Slab';
+    }
+
     svg {
+      color: #f90;
       margin-right: 0.2rem;
       width: 2.5rem;
       height: 2.5rem;

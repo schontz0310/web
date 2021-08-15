@@ -7,5 +7,13 @@ const HeaderStyle = {
 const SideBarStyles = {
   width: 13,
 }
+const PaginationContainer = {
+  height: 6,
+}
 
-export {HeaderStyle, SideBarStyles }
+const Collors = {
+  primary: '#C28F0B',
+  background: '#f2f3f5'
+}
+
+export {HeaderStyle, SideBarStyles, Collors, PaginationContainer}

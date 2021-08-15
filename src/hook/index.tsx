@@ -2,12 +2,15 @@
 import React from 'react';
 import { ToastProvider } from './toast';
 import { AuthProvider } from './auth';
+import {PaginationProvider} from './pagination'
 
 const AppProvider: React.FC = ({ children }) => {
   return (
     <>
       <AuthProvider>
-        <ToastProvider>{children}</ToastProvider>
+        <PaginationProvider>
+          <ToastProvider>{children}</ToastProvider>
+        </PaginationProvider>
       </AuthProvider>
     </>
   );
