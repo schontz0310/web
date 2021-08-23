@@ -11,12 +11,13 @@ import {
 
 import ActionHeader from '../../components/ActionHeader';
 import ModalDevice, { DeviceFormData } from '../../components/Modal/Device/ModalCreateDevice';
+import ModalConnectDevice from '../../components/Modal/Device/ModalConnectDevice ';
 import ModalDeviceUpdate from '../../components/Modal/Device/ModalUpdateDevice';
 import { useApi } from '../../services/hooks/useApi';
 import { HTTPMethod, Recurse } from '../../services/api';
 import { useToast } from '../../hook/toast';
-import { findAllDevices } from '../../services/hooks/useFetch';
-import Appointment from '../../components/Appointment';
+import Appointment from '../../components/Appointment/Device';
+import { findAllDevices } from '../../services/hooks/useDeviceFetch';
 
 interface IFindAllDevicesResponse {
   id: string;
@@ -32,6 +33,7 @@ export default function Devices ():JSX.Element {
 
   const [modalVisible, setModalVisible] = useState(false)
   const [modalEditVisible, setModalEditVisible] = useState(false)
+  const [modalConnectVisible, setModalConnectVisible] = useState(false)
   const [editedValues, setEditedValues] = useState<Omit< IFindAllDevicesResponse, "created_at" | "updated_at">>({
     code: '',
     id: '',
@@ -44,12 +46,44 @@ export default function Devices ():JSX.Element {
     
   const {fullData} = findAllDevices<IFindAllDevicesResponse>()
  
+  function showConnectModal(deviceData: Omit< IFindAllDevicesResponse, "created_at" | "updated_at">) {
+    setEditedValues(deviceData)   
+    setModalConnectVisible(true)
+  }
+
   function showEditModal(deviceData: Omit< IFindAllDevicesResponse, "created_at" | "updated_at">) {
     setEditedValues(deviceData)
     setModalEditVisible(true)
   }
 
   async function updateDevice(deviceData:Omit< IFindAllDevicesResponse, "created_at" | "updated_at">) {
+    try {
+      const response = await useApi(deviceData, HTTPMethod.patch, Recurse.updateDevice)
+      if (response.status === 200 ) {
+        setModalEditVisible(false)
+        addToast({
+          type: 'success',
+          title: 'Device editado com sucesso',
+          description: `Cadastro ${response.statusText}`
+        })
+        queryClient.resetQueries('deviceslist')
+      }else {
+        addToast({
+          type: 'error',
+          title: 'Erro ao Cadastrar',
+          description: ` ${response.data.message}`
+        })
+      }
+    } catch (error) {
+      addToast({
+        type: 'error',
+        title: 'Falha',
+        description: `${error.response}`
+      })
+    }
+  }
+
+  async function handleConnectDevice(deviceData:Omit< IFindAllDevicesResponse, "created_at" | "updated_at">) {
     try {
       const response = await useApi(deviceData, HTTPMethod.patch, Recurse.updateDevice)
       if (response.status === 200 ) {
@@ -145,8 +179,12 @@ export default function Devices ():JSX.Element {
               (deviceData: Omit< IFindAllDevicesResponse, "created_at" | "updated_at">) =>  
               showEditModal(deviceData)
             }
+            clickConnect={
+              (deviceData: Omit< IFindAllDevicesResponse, "created_at" | "updated_at">) =>  
+              showConnectModal(deviceData)
+            }
           />
-        )) }
+        ))}
       </ContentContainer>
       <FooterContainer />
       <ModalDevice
@@ -154,14 +192,18 @@ export default function Devices ():JSX.Element {
         setIsOpen={() => setModalVisible(false)}
         handleAddDevice={(data) => createDevice(data)}
       />
-      {modalEditVisible && (
-        <ModalDeviceUpdate
-          isOpen={modalEditVisible}
-          setIsOpen={() => setModalEditVisible(false)}
-          values={editedValues}
-          handleUpdateDevice={(device) => updateDevice(device)}
-        />
-      )}
+      <ModalDeviceUpdate
+        isOpen={modalEditVisible}
+        setIsOpen={() => setModalEditVisible(false)}
+        values={editedValues}
+        handleUpdateDevice={(device) => updateDevice(device)}
+      />
+      <ModalConnectDevice 
+        isOpen={modalConnectVisible}
+        setIsOpen={() => setModalConnectVisible(false)}
+        values={editedValues}
+        handleConnectDevice={(device) => handleConnectDevice(device)}
+      />
     </Container>
   );
 };

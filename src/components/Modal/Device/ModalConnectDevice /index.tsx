@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
@@ -13,14 +13,18 @@ import Modal from "../../index";
 import Input from '../../../Input';
 import Button from '../../../Button';
 import Select from '../../../Select';
+import { findAllCompanies } from '../../../../services/hooks/useCompanyFetch';
+import { CreateCompanyFormData } from '../../../../pages/Company';
 
 interface IModalProps {
   isOpen: boolean;
+  values: ConnectDeviceFormData;
   setIsOpen: () => void;
-  handleAddDevice: (device: DeviceFormData) => void;
+  handleConnectDevice: (device: ConnectDeviceFormData) => void;
 }
 
-export interface DeviceFormData {
+export interface ConnectDeviceFormData {
+  id: string;
   code: string;
   model: string;
   variant: string;
@@ -38,10 +42,15 @@ interface optionProps {
   status: optionParamsProps[]
 }
 
-function ModalDevice ({
+interface ICompanieRequest extends CreateCompanyFormData {
+  id: string
+}
+
+function ModalConnectDevice ({
   isOpen,
   setIsOpen,
-  handleAddDevice
+  handleConnectDevice,
+  values
 }: IModalProps) {
 
   const formRef = useRef<FormHandles>(null);
@@ -84,11 +93,20 @@ function ModalDevice ({
 
   const { addToast } = useToast();
 
-  function createDevice(data: DeviceFormData) {
-     handleAddDevice(data)
+  const {fullData} = findAllCompanies<ICompanieRequest>()
+
+  const companies = fullData.map(company => {
+    return {
+      value: company.name,
+      text: company.id
+    }
+  })
+
+  function createDevice(data: ConnectDeviceFormData) {
+    handleConnectDevice(data)
   }
 
-  async function handleSubmit(data: DeviceFormData) {
+  async function handleSubmit(data: ConnectDeviceFormData) {
       try {
         formRef.current?.setErrors({});
         const schemaValidation = Yup.object().shape({
@@ -130,12 +148,17 @@ function ModalDevice ({
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
       <Form ref={formRef} onSubmit={handleSubmit}>
-        <h1>Cadastro de Dispositivos</h1>
+        <h1>Conectar Dispositivo</h1>
         <TwoFields> 
-          <Input name="code" placeholder="Código do dispositivo" />
+          <Input 
+            name="code" 
+            placeholder="Código do dispositivo" 
+            value={values.code}
+          />
           <Select
             initialValue="selecione o modelo"
             name="model"
+            value={values.model}
             options={options.models}
           />
         </TwoFields>
@@ -143,14 +166,21 @@ function ModalDevice ({
           <Select
             initialValue="selecione a variação"
             name="variant"
+            value={values.variant}
             options={options.variants}
           />
           <Select
             initialValue="selecione o status"
             name="status"
+            value={values.status}
             options={options.status}
           />
         </TwoFields>
+        <Select 
+          initialValue="Selecione o cliente"
+          name="company"
+          options={companies}
+        />
         <Button
           model='submit'
         />
@@ -159,4 +189,4 @@ function ModalDevice ({
   );
 };
 
-export default ModalDevice;
+export default ModalConnectDevice;
