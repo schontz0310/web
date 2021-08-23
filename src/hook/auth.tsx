@@ -5,11 +5,29 @@
 import React, { createContext, useCallback, useState, useContext } from 'react';
 import api from '../services/api';
 
+export interface Company {
+  address_city: string;
+  address_district: string;
+  address_number: string;
+  address_state: string;
+  address_street: string;
+  address_zip_code: string;
+  comment: string;
+  email: string;
+  id: string;
+  name: string;
+  phone: string;
+  type: string;
+  type_value: string;
+  user: string;
+}
+
 export interface User {
   id: string;
   name: string;
   email: string;
-  avatar_url: string;
+  company_id: string;
+  company: Company
 }
 
 interface Master {

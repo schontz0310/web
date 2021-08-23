@@ -31,7 +31,6 @@ const Route: React.FC<RouteProps> = ({
       render={({location}) => {
         if (master){
           if(isPrivate === !!master){
-            console.log("Master")
             return (
               <>
                 <Component />
@@ -51,7 +50,6 @@ const Route: React.FC<RouteProps> = ({
         }
         if (user){
           if(isPrivate === !!user){
-            console.log("User")
             return (
               <>
                 <Component />

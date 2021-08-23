@@ -24,7 +24,7 @@ export const ContentContainer = styled.div`
   width: 100%;
   height: calc(100% - ${paginationHeight}rem);
   overflow-y: scroll;
-  //padding-right: 2rem;
+  padding-right: 2rem;
   background: transparent;
   
   &::-webkit-scrollbar {

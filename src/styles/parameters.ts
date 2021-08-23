@@ -13,7 +13,16 @@ const PaginationContainer = {
 
 const Collors = {
   primary: '#C28F0B',
-  background: '#f2f3f5'
+  background: '#f2f3f5',
+  appointment: {
+    background: '#232323'
+  },
+  deviceStatus: {
+    active: '#67c23a',
+    inactive: '#909399',
+    blocked: '#f56c6c',
+    pending: '#e6a23c'
+  }
 }
 
 export {HeaderStyle, SideBarStyles, Collors, PaginationContainer}
