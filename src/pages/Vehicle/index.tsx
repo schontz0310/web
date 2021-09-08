@@ -1,15 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ActionHeader from '../../components/ActionHeader';
 
 import {Container, ContentContainer, FooterContainer} from './styles'
 
 const Vehicle: React.FC = () => {
+  const [modal, setmodal] = useState<boolean>()
   return (
     <Container>
       <ActionHeader 
         buttonFilter
         buttonRegister
-        registerbuttonClick={() => console.log('clicou')}
+        registerbuttonClick={() => modal && setmodal(false)}
       />
       <ContentContainer>
         <h1>Vehicle</h1>

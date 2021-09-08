@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
