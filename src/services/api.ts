@@ -20,18 +20,8 @@ export enum Recurse{
 }
 
 
-const api = {
-  localApi: axios.create({
-    baseURL: 'http://localhost:3333',
-  }),
-  homolApi: axios.create({
-    baseURL: 'http://localhost:3333',
-  }),
-  prodApi: axios.create({
-    baseURL: 'https://sds3-ags-dsvendas.herokuapp.com',
-  }),
-}
+const api = axios.create({
+    baseURL: process.env.REACT_APP_API_ENDPOINT
+  })
 
-const setApi = api.localApi
-
-export default setApi;
+export default api;

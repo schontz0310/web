@@ -10,6 +10,7 @@ import Routes from './routes';
 const queryClient = new QueryClient()
 
 function App() {
+  console.log({ REACT_APP_API_ENDPOINT: process.env.REACT_APP_API_ENDPOINT })
   return (
     <>
       <QueryClientProvider client={queryClient}>
