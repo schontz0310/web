@@ -1,5 +1,5 @@
 import { shade } from 'polished';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { Collors } from '../../../styles/parameters';
 
 export const AppointmentContainer = styled.div`

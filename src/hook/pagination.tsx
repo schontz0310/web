@@ -28,31 +28,19 @@ export const PaginationProvider: React.FC = ({ children }) => {
 
   const addPagination = useCallback(({records, toPage, toPerPage} : AddPropsPagination<unknown>) => {
     
-    // if (records.length < 1) return
-
-    console.log("#################################### pagination ##################")
-    console.log("#################")
-    console.log(records)
-    console.log("#################")
     setFullData(records)
     setPage(toPage)
     setPerPage(toPerPage)
 
     const registerCount = records.length
-    console.log({
-      count: registerCount
-    })
+    
     setTotalRegisters(registerCount)
 
     const start = (toPage -1) * toPerPage
     const end = start + toPerPage
 
     const PageValues = records.splice(start, end) as []
-    console.log("#################")
-    console.log(PageValues)
-    console.log("#################")
     setPageData(PageValues)
-    console.log("###############################################################")
 
   }, []);
   

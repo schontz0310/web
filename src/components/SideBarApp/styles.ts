@@ -1,8 +1,7 @@
 import { shade } from 'polished';
 import styled, { keyframes } from 'styled-components';
-import {HeaderStyle, SideBarStyles} from '../../styles/parameters'
+import {SideBarStyles} from '../../styles/parameters'
 
-const headerHeight = HeaderStyle.Header.height
 const sidebarWidht = SideBarStyles.width
 
 export const Container = styled.div`

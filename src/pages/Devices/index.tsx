@@ -57,7 +57,6 @@ export default function Devices ():JSX.Element {
   }
 
   async function updateDevice(deviceData:Omit< IFindAllDevicesResponse, "created_at" | "updated_at">) {
-    try {
       const response = await useApi(deviceData, HTTPMethod.patch, Recurse.updateDevice)
       if (response.status === 200 ) {
         setModalEditVisible(false)
@@ -74,17 +73,9 @@ export default function Devices ():JSX.Element {
           description: ` ${response.data.message}`
         })
       }
-    } catch (error) {
-      addToast({
-        type: 'error',
-        title: 'Falha',
-        description: `${error.response}`
-      })
-    }
   }
 
   async function handleConnectDevice(deviceData:Omit< IFindAllDevicesResponse, "created_at" | "updated_at">) {
-    try {
       const response = await useApi(deviceData, HTTPMethod.patch, Recurse.updateDevice)
       if (response.status === 200 ) {
         setModalEditVisible(false)
@@ -101,17 +92,9 @@ export default function Devices ():JSX.Element {
           description: ` ${response.data.message}`
         })
       }
-    } catch (error) {
-      addToast({
-        type: 'error',
-        title: 'Falha',
-        description: `${error.response}`
-      })
-    }
   }
 
   async function removeDevice(id:string) {
-    try {
       const response = await useApi(id, HTTPMethod.delete, Recurse.removeDevice)
       if (response.status === 204 ) {
         addToast({
@@ -127,17 +110,9 @@ export default function Devices ():JSX.Element {
           description: ` ${response.data.message}`
         })
       }
-    } catch (error) {
-      addToast({
-        type: 'error',
-        title: 'Falha',
-        description: `${error.response}`
-      })
-    }
   }
   async function createDevice(data: DeviceFormData): Promise<any> {
     setModalVisible(false)
-    try {
       const response = await useApi(data, HTTPMethod.post, Recurse.createDevice)
       if (response.status === 200 ) {
         addToast({
@@ -153,13 +128,6 @@ export default function Devices ():JSX.Element {
           description: ` ${response.data.message}`
         })
       }
-    } catch (error) {
-      addToast({
-        type: 'error',
-        title: 'Falha',
-        description: `${error.response}`
-      })
-    }
   }
   
   return (
