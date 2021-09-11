@@ -40,6 +40,21 @@ export const Animationcontainer = styled.div`
     margin: 80px 0;
     width: 340px;
     text-align: center;
+    button {
+      margin-top: 24px;
+      background: #ff9000;
+      height: 56px;
+      border-radius: 10px;
+      padding: 0 16px;
+      color: #fff;
+      font-weight: 500;
+      width: 100%;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background: ${shade(0.2, '#ff9000')};
+      }
+    }
     div + div{
       margin-top: 0.75rem;
     }
