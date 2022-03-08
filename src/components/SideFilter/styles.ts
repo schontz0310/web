@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Collors } from '../../styles/parameters';
 
 export const SideFilterContainer = styled.div`
   z-index: 9997;
@@ -15,7 +16,7 @@ export const SideFilterContainer = styled.div`
 `;
 
 export const RightFilterContainer = styled.div`
-  background: #F2F2F2;
+  background: #fff;
   height: 100%;
   overflow-y: auto;
   padding: 2rem;
@@ -36,6 +37,7 @@ export const RightFilterContainer = styled.div`
   > svg {
     cursor: pointer;
     float: right;
+    color: ${Collors.primary}
   }
 
   &:before {

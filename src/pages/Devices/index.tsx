@@ -16,7 +16,7 @@ import ModalDeviceUpdate from '../../components/Modal/Device/ModalUpdateDevice';
 import { useApi } from '../../services/hooks/useApi';
 import { HTTPMethod, Recurse } from '../../services/api';
 import { useToast } from '../../hook/toast';
-import Appointment from '../../components/Appointment/Device';
+import {DeviceAppointment} from '../../components/Appointment/Device';
 import { findAllDevices } from '../../services/hooks/useDeviceFetch';
 
 interface IFindAllDevicesResponse {
@@ -139,7 +139,7 @@ export default function Devices ():JSX.Element {
       />
       <ContentContainer>
         {fullData.map( device => (
-          <Appointment
+          <DeviceAppointment
             key={device.id} 
             values={device}
             clickExclude={(id: string) => removeDevice(id)}

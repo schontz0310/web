@@ -12,6 +12,7 @@ import getValidationErrors from '../../../utils/getvalidationErros';
 import { Form } from './styles';
 import Modal from "../index";
 import Input from '../../Input';
+import { useLoading } from '../../../hook/spinner';
 
 
 interface IModalProps {
@@ -34,6 +35,7 @@ const ModalAdmin: React.FC<IModalProps> = ({
 
   const { masterSignIn } = useAuth();
   const { addToast } = useToast();
+  const {removeLoading} = useLoading()
 
 
   const handleSubmit = useCallback(
@@ -60,6 +62,7 @@ const ModalAdmin: React.FC<IModalProps> = ({
           formRef.current?.setErrors(errors);
           return;
         }
+        removeLoading()
         addToast({
           type: 'error',
           title: 'Erro na autenticação',
@@ -67,7 +70,7 @@ const ModalAdmin: React.FC<IModalProps> = ({
         });
       }
     },
-    [addToast, masterSignIn],
+    [addToast, masterSignIn, removeLoading],
   );
 
   return (

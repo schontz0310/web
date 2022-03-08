@@ -14,7 +14,7 @@ import Input from '../../../Input';
 import Button from '../../../Button';
 import Select from '../../../Select';
 import { findAllCompanies } from '../../../../services/hooks/useCompanyFetch';
-import { CreateCompanyFormData } from '../../../../pages/Company';
+import { CreateCompanyFormData } from '../../../../pages/CreateCompany';
 
 interface IModalProps {
   isOpen: boolean;
@@ -42,8 +42,9 @@ interface optionProps {
   status: optionParamsProps[]
 }
 
-interface ICompanieRequest extends CreateCompanyFormData {
-  id: string
+export interface ICompanyRequest extends CreateCompanyFormData {
+  id: string;
+  avatarUrl: string;
 }
 
 function ModalConnectDevice ({
@@ -93,7 +94,7 @@ function ModalConnectDevice ({
 
   const { addToast } = useToast();
 
-  const {fullData} = findAllCompanies<ICompanieRequest>()
+  const {fullData} = findAllCompanies<ICompanyRequest>()
 
   const companies = fullData.map(company => {
     return {

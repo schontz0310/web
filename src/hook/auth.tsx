@@ -4,9 +4,10 @@
 /* eslint-disable react/prop-types */
 import React, { createContext, useCallback, useState, useContext } from 'react';
 import api from '../services/api';
+import { useLoading } from './spinner';
 
 export interface Company {
-  address_city: string;
+  address_city: string; 
   address_district: string;
   address_number: string;
   address_state: string;
@@ -72,7 +73,7 @@ export const AuthContext = createContext<AuthContextData>(
 );
 
 export const AuthProvider: React.FC = ({ children }) => {
-
+  const {showLoading, removeLoading} = useLoading()
   const [data, setData] = useState<AuthState>(() => {
     const token = localStorage.getItem('@AGS:token');
     const user = localStorage.getItem('@AGS:user');
@@ -88,6 +89,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [masterData, setMasterData] = useState<MasterAuthState>(() => {
     const token = localStorage.getItem('@AGS:mtoken');
     const master = localStorage.getItem('@AGS:muser');
+    
 
     if (token && master) {
       api.defaults.headers.authorization = `Bearer ${token}`;
@@ -102,7 +104,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     password,
     company_type,
     company_type_value }: SigInCredentials) => {
-
+    showLoading()
     const response = await api.post('/sessions', {
       email,
       password,
@@ -116,22 +118,26 @@ export const AuthProvider: React.FC = ({ children }) => {
 
     api.defaults.headers.authorization = `Bearer ${token}`;
     setData({ token, user });
-  }, []);
+    removeLoading()
+  }, [removeLoading, showLoading]);
 
   const masterSignIn = useCallback(async ({ email, password }: SigInMasterCredentials) => {
-    const response = await api.post('/sessions/master', {
-      email,
-      password,
-    });
-    const { token, user } = response.data;
-
-    localStorage.setItem('@AGS:mtoken', token);
-    localStorage.setItem('@AGS:muser', JSON.stringify(user));
-
-    api.defaults.headers.authorization = `Bearer ${token}`;
-
-    setMasterData({ token, master: user});
-  }, []);
+    showLoading()
+      const response = await api.post('/sessions/master', {
+        email,
+        password,
+      });
+      const { token, user } = response.data;
+  
+      localStorage.setItem('@AGS:mtoken', token);
+      localStorage.setItem('@AGS:muser', JSON.stringify(user));
+  
+      api.defaults.headers.authorization = `Bearer ${token}`;
+  
+      setMasterData({ token, master: user});
+      removeLoading()  
+    
+  }, [removeLoading, showLoading]);
 
   const signOut = useCallback(() => {
     localStorage.removeItem('@AGS:token');
@@ -160,7 +166,17 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user: data.user, master: masterData.master, signIn, signOut, updateUser, masterSignIn, masterSignOut }}
+      value={
+        { 
+          user: data.user,
+          master: masterData.master,
+          signIn,
+          signOut,
+          updateUser,
+          masterSignIn,
+          masterSignOut
+        }
+      }
     >
       {children}
     </AuthContext.Provider>

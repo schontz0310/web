@@ -28,6 +28,7 @@ import Button from '../../components/Button';
 import { useToast } from '../../hook/toast';
 import { useApi } from '../../services/hooks/useApi';
 import { HTTPMethod, Recurse } from '../../services/api';
+import { useLoading } from '../../hook/spinner';
 
 interface IIBGEUFResponse {
   sigla: string;
@@ -41,28 +42,28 @@ interface optionProps {
 export interface CreateCompanyFormData {
   name: string;
   type: string;
-  identifier: string;
+  type_value: string;
   comment: string;
-  CEP: string;
-  street: string;
-  number: string;
-  district: string;
-  city: string;
-  uf: string;
-  nameContact: string;
-  fone: string;
-  user_name: string;
-  user_email: string;
-  user_password: string;
-  user_password_confirm: string;
+  address_zip_code: string;
+  address_street: string;
+  address_number: string;
+  address_district: string;
+  address_city: string;
+  address_state: string;
+  contact: string;
+  phone: string;
+  user: string;
+  email: string;
+  password: string;
+  password_confirm: string;
 }
 
-export default function Company ():JSX.Element {
+function CreateCompany ():JSX.Element {
 
+  const {showLoading, removeLoading} = useLoading()
   const { addToast } = useToast();
   const history = useHistory();
   const formRef = useRef<FormHandles>(null);
-
   const [ufs, setUfs] = useState<optionProps[]>([])
   const [mask, setMask] = useState<MaskType>(MaskType.blank)
 
@@ -81,6 +82,7 @@ export default function Company ():JSX.Element {
   }, [])
 
   async function createCompany(data: CreateCompanyFormData): Promise<any> {
+    showLoading()
     try {
       const response = await useApi(data, HTTPMethod.post, Recurse.createCompany)
       if (response.data.status) {
@@ -97,27 +99,39 @@ export default function Company ():JSX.Element {
         })
         formRef.current?.reset()
         history.push('/admin');
+        removeLoading()
       }
-    } catch (error) {
+    } catch (error: unknown) {
+      removeLoading()
       addToast({
         type: 'error',
         title: 'Falha',
-        description: `${error.response}`
+        description: `${error}`
       })
-      const field = formRef.current?.getFieldRef('type_value')
-      field.focus()
     }
   }
 
   async function handleSubmit(data: CreateCompanyFormData) {
+    
+    const typeValueFomatted = data.type_value.replaceAll(/[^0-9]/g, "");
+    const addressZipCodeFormatted = data.address_zip_code.replaceAll(/[^0-9]/g, "")
+    const phoneFormatted = data.phone.replaceAll(/[^0-9]/g, "")
+
+    const dataFormatted: CreateCompanyFormData = {
+      ...data,
+      type_value: typeValueFomatted,
+      address_zip_code: addressZipCodeFormatted,
+      phone: phoneFormatted
+    }
+
     try {
       formRef.current?.setErrors({});
       const schemaValidation = Yup.object().shape({
         name: Yup.string().required('Nome da Empresa obrigatório'),
         type: Yup.string().oneOf(['CPF', 'CNPJ']).required(),
-        type_value: Yup.string().required().min(14).max(18),
+        type_value: Yup.string().required().min(11).max(18),
         comment: Yup.string().notRequired(),
-        address_zip_code: Yup.string().required().length(9),
+        address_zip_code: Yup.string().required().length(8),
         address_street: Yup.string().required(),
         address_number: Yup.string().required(),
         address_district: Yup.string().required(),
@@ -130,10 +144,10 @@ export default function Company ():JSX.Element {
         password: Yup.string().min(8).required(),
         password_confirm: Yup.string().oneOf([Yup.ref('password')])
       });
-      await schemaValidation.validate(data, {
+      await schemaValidation.validate(dataFormatted, {
         abortEarly: false,
       });
-      createCompany(data)
+      createCompany(dataFormatted)
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const errors = getValidationErrors(err);
@@ -281,3 +295,5 @@ export default function Company ():JSX.Element {
     </Container>
   );
 };
+
+export {CreateCompany}

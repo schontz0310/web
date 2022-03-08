@@ -19,7 +19,7 @@ import {
 import DeviceAvatar from '../../../assets/device3.png'
 
 
-export interface AppointmentData{
+export interface DeviceAppointmentData{
   id: string;
   code: string;
   model: string;
@@ -31,23 +31,23 @@ export interface AppointmentData{
 
 interface IAppointmentProps {
   children?: React.ReactNode;
-  values: AppointmentData;
+  values: DeviceAppointmentData;
   showFilter?: boolean;
   buttonRegister?: boolean;
   filterButtonName?: string;
   registerButtonName?: string;
   clickExclude?: (id: string) => void 
-  clickUpdate?: (deviceData: Omit< AppointmentData, "created_at" | "updated_at"> ) => void 
-  clickConnect?: (deviceData: Omit< AppointmentData, "created_at" | "updated_at"> ) => void 
+  clickUpdate?: (deviceData: Omit< DeviceAppointmentData, "created_at" | "updated_at"> ) => void 
+  clickConnect?: (deviceData: Omit< DeviceAppointmentData, "created_at" | "updated_at"> ) => void 
 }
 
-function Appointment ({
+function DeviceAppointment ({
   values,
   clickExclude,
   clickUpdate,
   clickConnect
 }: IAppointmentProps ): JSX.Element {
-  const [data] = useState<AppointmentData>(values)
+  const [data] = useState<DeviceAppointmentData>(values)
   return (
     <>
       { !!data && (
@@ -117,4 +117,4 @@ function Appointment ({
     </>
   )
 }    
-export default Appointment;   
+export {DeviceAppointment};   

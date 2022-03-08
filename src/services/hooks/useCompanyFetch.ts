@@ -11,7 +11,6 @@ interface ResponseResult<T> {
 async function getAllCompanies<T>(): Promise<T[]> { 
   const response = await api.get(Recurse.findAllCompanies)
   return response.data
-  
 }
 
 export function findAllCompanies<T>(): ResponseResult<T> {
@@ -26,6 +25,6 @@ export function findAllCompanies<T>(): ResponseResult<T> {
   const totalRegisters = data?.length
   return {
     totalRegisters,
-    fullData: data || []
+    fullData: data ||[]
   }
 }

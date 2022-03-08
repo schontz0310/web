@@ -22,6 +22,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.1.0",
+    "react-loading-overlay-ts": "^0.2.0",
     "react-modal": "^3.12.1",
     "react-query": "^3.16.0",
     "react-router-dom": "^5.2.0",
@@ -39,6 +40,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "local": "env-cmd -e local react-scripts start",
     "dev": "env-cmd -e development react-scripts start",
     "stg": "env-cmd -e staging react-scripts start",
     "prd": "env-cmd -e production react-scripts start"
